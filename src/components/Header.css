@@ -1,0 +1,12 @@
+.title{
+    font-size: 2.5em;
+    text-transform: uppercase;
+    font-weight: lighter;
+    display: table;
+    margin: 0 auto;
+}
+
+.header {
+    width: 100%;
+    margin-bottom: 1%;
+}

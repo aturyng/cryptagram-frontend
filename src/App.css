@@ -1,0 +1,17 @@
+
+.main-container {
+  width: 80%;
+  height: 100%;
+  background-color: lightgray;
+  border-radius: 0.5em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-item {
+  width: 100%;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 0.5em;
+}
