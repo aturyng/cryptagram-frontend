@@ -30,7 +30,7 @@ export default function MessageForm(props: Props) {
   const validationSchema = Yup.object().shape({
     body: Yup.string()
       .required('Message is required')
-      .max(256, 'Message must not exceed 256 characters'),
+      .max(5000, 'Message must not exceed 5000 characters'),
     destroyLive: Yup.bool(),
     destroyLiveAfterSeconds: Yup.number()
       .when('destroyLive', {
