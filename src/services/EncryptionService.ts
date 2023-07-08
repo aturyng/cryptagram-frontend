@@ -1,11 +1,6 @@
 
 export default class EncryptionService {
 
-
-    public strToBase64(input: string): string {
-      return btoa(input);
-    }
-
     public generateRandomPassword(length = 32){
         const charset = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]\:;?><,./-=';
       
