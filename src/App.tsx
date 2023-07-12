@@ -4,22 +4,28 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import Messages from './components/Messages'
 import CreateMessage from './components/CreateMessage'
 import MessageCreated from './components/MessageCreated'
-import React from 'react'
+import ResponsiveAppBar from './components/ResponsiveAppBar'
+import About from './components/About'
 
 
 function App() {
 
   return (
     <>
-    <Routes>
+
+      <Routes>
         <Route
-            path="/"
-            element={<Navigate to="/messages" replace />}
+          path="/"
+          element={<Navigate to="/messages" replace />}
         />
-      <Route path="/messages" element={<CreateMessage />} />
-      <Route path="/messages/:id" element={<Messages />} />
-      <Route path="/messages/created" element={<MessageCreated />} />
-    </Routes>
+        <Route path="/messages" element={<ResponsiveAppBar />}>
+          <Route index element={<CreateMessage />} />
+          <Route path=":id" element={<Messages />} />
+          <Route path="created" element={<MessageCreated />} />
+          <Route path="about" element={<About />} />
+        </Route>
+
+      </Routes>
     </>
   )
 }

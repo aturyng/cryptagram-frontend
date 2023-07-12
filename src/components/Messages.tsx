@@ -4,6 +4,7 @@ import { useLocation, useParams } from 'react-router-dom'
 import MessageDeleted from './MessageDeleted';
 import PasswordForm from './PasswordForm';
 import Utils from '../util/Utils';
+import { Grid } from '@mui/material'
 
 interface Message {
     destroyLiveAfterSeconds: number,
@@ -18,16 +19,16 @@ function Messages() {
     const search = useLocation().search;
     const password = new URLSearchParams(search).get('pw');
 
-    const loadMessage = function(_password: string){
+    const loadMessage = function (_password: string) {
         axios.get<Message>(`http://localhost:8000/api/messages/${id}?pw=${_password}`)
-        .then(response => {
-            console.log(response.data);
-            setMessage(response.data);
-        })
-        .catch(() => setMessage(undefined))
-        .finally(() => {
-            setLoaded(true);
-        });
+            .then(response => {
+                console.log(response.data);
+                setMessage(response.data);
+            })
+            .catch(() => setMessage(undefined))
+            .finally(() => {
+                setLoaded(true);
+            });
     }
 
     useEffect(() => {
@@ -50,18 +51,23 @@ function Messages() {
     }
     return (
         <>
-            {!password &&
-                <PasswordForm onPasswordEntered={onPasswordReceived} />
-            }
-            {loaded && !message &&
-                <MessageDeleted />
-            }
-            {loaded && message &&
-                <div>
-                    <h2>Message: {message?.body}</h2>
-                    <h3>Delete after {message?.destroyLiveAfterSeconds} seconds</h3>
-                </div>
-            }
+            <Grid item className='form-item'>
+                {!password &&
+                    <PasswordForm onPasswordEntered={onPasswordReceived} />
+                }
+                {loaded && !message &&
+                    <MessageDeleted />
+                }
+                {loaded && message &&
+
+                    <div>
+                        <h2>Message: {message?.body}</h2>
+                        <h3>Delete after {message?.destroyLiveAfterSeconds} seconds</h3>
+                    </div>
+
+
+                }
+            </Grid>
         </>
     )
 }
