@@ -1,4 +1,4 @@
-import { Button, Checkbox, FormControlLabel, Grid, List, ListItem, TextField } from '@mui/material'
+import { Button, FormControlLabel, Grid, List, ListItem, Switch, TextField } from '@mui/material'
 import { Textarea } from '@mui/joy'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup';
@@ -99,12 +99,8 @@ export default function MessageForm(props: Props) {
 
             <List disablePadding>
               <ListItem alignItems="flex-start" disablePadding>
-                <FormControlLabel
-                  label="Close after"
-                  labelPlacement="end"
-                  control={<Checkbox
-                    {...register("destroyLive")}
-                  />}
+                <FormControlLabel label="Close after" labelPlacement="end" control={
+                  <Switch {...register("destroyLive")} />}
                 />
                 <TextField
                   type='number'
