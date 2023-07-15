@@ -7,7 +7,7 @@ import CopyableField from "./CopyableField";
 
 function MessageCreated() {
   const location = useLocation();
-  let url = `http://localhost:5173/messages/${location.state.messageId}`
+  let url = `${import.meta.env.VITE_FRONTEND_BASE_URL}/messages/${location.state.messageId}`
   if (location.state.password) {
     url = url + `?${Utils.URL_PARAM_PASSWORD}=${Utils.toUrlSafeBase64(location.state.password)}`
   }

@@ -35,7 +35,7 @@ function Messages() {
 
   const loadMessage = function (_password: string) {
     axios
-      .get<Message>(`http://localhost:8000/api/messages/${id}?${Utils.URL_PARAM_PASSWORD}=${_password}`)
+      .get<Message>(`${import.meta.env.VITE_BACKEND_ENDPOINT}/api/messages/${id}?${Utils.URL_PARAM_PASSWORD}=${_password}`)
       .then(response => {
         console.log(response.data);
         setMessage(response.data);

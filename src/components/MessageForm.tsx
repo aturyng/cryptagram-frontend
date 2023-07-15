@@ -67,7 +67,7 @@ export default function MessageForm(props: Props) {
       formDataRequiredFields.password = randomStr;
     }
 
-    axios.post("http://localhost:8000/api/messages/", formDataRequiredFields).then((response) => {
+    axios.post(`${import.meta.env.VITE_BACKEND_ENDPOINT}/api/messages/`, formDataRequiredFields).then((response) => {
       console.log("randomStr: ");
       console.log(randomStr);
       props.onMessageCreated(response.data.data, randomStr)
