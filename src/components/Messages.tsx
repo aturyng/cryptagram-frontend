@@ -26,6 +26,7 @@ function Messages() {
   const [message, setMessage] = useState<Message>();
   const [loaded, setLoaded] = useState<boolean>(false);
   const [decipheringText, setDecipheringText] = useState<string | undefined>('');
+  const [passwordReceived, setPasswordReceived] = useState<boolean>(false);
   const [decryptionStatus, setDecryptionStatus] = useState<DecryptionStatus>(DecryptionStatus.Initial);
  
 
@@ -115,7 +116,7 @@ function Messages() {
   };
 
   const onPasswordReceived = function (_password: string) {
-    
+    setPasswordReceived(true);
     loadMessage(Utils.toUrlSafeBase64(_password));
   }
 
@@ -123,7 +124,7 @@ function Messages() {
   return (
     <>
       <Grid item className="form-item">
-        {!password && <PasswordForm onPasswordEntered={onPasswordReceived} />}
+        {!password && !passwordReceived && <PasswordForm onPasswordEntered={onPasswordReceived} />}
         {loaded && !message && <MessageDeleted />}
         {loaded && message && (
           <Grid item className="form-item">
