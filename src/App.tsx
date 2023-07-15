@@ -12,7 +12,6 @@ function App() {
 
   return (
     <>
-
       <Routes>
         <Route
           path="/"
@@ -24,7 +23,6 @@ function App() {
           <Route path="created" element={<MessageCreated />} />
           <Route path="about" element={<About />} />
         </Route>
-
       </Routes>
     </>
   )
