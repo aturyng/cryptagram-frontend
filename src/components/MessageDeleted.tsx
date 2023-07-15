@@ -1,8 +1,12 @@
-import React from 'react'
+import { Alert, AlertTitle } from '@mui/material'
 
 function MessageDeleted() {
   return (
-    <div>Message has been deleted or has never existed!</div>
+    <Alert  severity="warning">
+      <AlertTitle>Not Found</AlertTitle>
+      Message has been deleted, never existed or the password is wrong!
+    </Alert>
+
   )
 }
 
