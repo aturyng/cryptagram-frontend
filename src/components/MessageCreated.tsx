@@ -7,7 +7,10 @@ import CopyableField from "./CopyableField";
 
 function MessageCreated() {
   const location = useLocation();
-  const url = `http://localhost:5173/messages/${location.state.messageId}?pw=${Utils.toUrlSafeBase64(location.state.password)}`
+  let url = `http://localhost:5173/messages/${location.state.messageId}`
+  if(location.state.password){
+    url = url + `?${Utils.URL_PARAM_PASSWORD}=${Utils.toUrlSafeBase64(location.state.password)}`
+  }
   return (
     <>
       <Grid item className='form-item'>
