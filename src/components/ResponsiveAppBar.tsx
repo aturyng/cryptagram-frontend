@@ -159,7 +159,7 @@ function ResponsiveAppBar() {
       }}>
         <Grid item justifyContent="flex-start" sm={12} md={8} lg={7} xl={6}>
           <Container component="main" sx={{ mb: 4 }} >
-            <Paper variant="outlined" elevation={15} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+            <Paper elevation={10} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
               <Outlet />
             </Paper>
           </Container>
