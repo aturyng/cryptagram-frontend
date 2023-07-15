@@ -1,0 +1,36 @@
+.envelope {
+  width: 100%;
+  background-color: #f3f3f3;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.envelope-content {
+  margin-bottom: 20px;
+}
+
+
+.lock-icon {
+  margin-right: 8px;
+  vertical-align: bottom;
+}
+
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.bounce {
+  animation: bounce 1.5s infinite;
+}
