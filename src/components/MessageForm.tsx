@@ -1,12 +1,12 @@
 import { Button, Checkbox, FormControlLabel, Grid, List, ListItem, TextField } from '@mui/material'
 import { Textarea } from '@mui/joy'
-import './MessageForm.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup';
 import Typography from './onepirate-template/modules/components/Typography'
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import EncryptionService from '../services/EncryptionService';
+import HttpsIcon from '@mui/icons-material/Https';
 
 
 type FormData = {
@@ -47,8 +47,8 @@ export default function MessageForm(props: Props) {
       })
       .oneOf([Yup.ref('password')], 'Passwords do not match'),
     destroyAfterDays: Yup.number()
-    .min(1, 'Cannot be negative or zero')
-    .max(60, 'Cannot exceed 60 days')
+      .min(1, 'Cannot be negative or zero')
+      .max(60, 'Cannot exceed 60 days')
   });
 
   const {
@@ -60,16 +60,16 @@ export default function MessageForm(props: Props) {
     resolver: yupResolver(validationSchema)
   });
   const onSubmit: SubmitHandler<FormData> = (formData) => {
-    let {["confirmPassword"]: _, ["destroyLive"]: __, ...formDataRequiredFields} = formData;
+    let { ["confirmPassword"]: _, ["destroyLive"]: __, ...formDataRequiredFields } = formData;
     let randomStr = "";
-    if(!formDataRequiredFields.password){
+    if (!formDataRequiredFields.password) {
       randomStr = props.encryptionService.generateRandomPassword();
       formDataRequiredFields.password = randomStr;
     }
-    
+
     axios.post("http://localhost:8000/api/messages/", formDataRequiredFields).then((response) => {
       console.log("randomStr: ");
-    console.log(randomStr);
+      console.log(randomStr);
       props.onMessageCreated(response.data.data, randomStr)
     });
   }
@@ -79,7 +79,7 @@ export default function MessageForm(props: Props) {
 
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <Textarea className="line"
+        <Textarea  sx={{ mb: 1, mt: 1 }}
           minRows={5}
           placeholder="Enter your self-destructing message here..."
           size="lg"
@@ -118,24 +118,20 @@ export default function MessageForm(props: Props) {
           </List>
 
         </Grid>
-
         <Grid item xs={12} sm={6} md={4} lg={3} >
-            <TextField
-              type='number'
-              label="Destroy after days"
-              variant='standard'
-              defaultValue={1}
-              fullWidth
-              {...register("destroyAfterDays")}
-              error={errors.destroyAfterDays ? true : false}
-              helperText={errors.destroyAfterDays?.message}
-            />
+          <TextField
+            type='number'
+            label="Destroy after days"
+            variant='standard'
+            defaultValue={1}
+            fullWidth
+            {...register("destroyAfterDays")}
+            error={errors.destroyAfterDays ? true : false}
+            helperText={errors.destroyAfterDays?.message}
+          />
         </Grid>
       </Grid>
-
       <Grid container spacing={2} >
-
-
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <TextField
             type='password'
@@ -147,7 +143,6 @@ export default function MessageForm(props: Props) {
             helperText={errors.password?.message}
           />
         </Grid>
-
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <TextField
             type='password'
@@ -160,13 +155,9 @@ export default function MessageForm(props: Props) {
           />
         </Grid>
         <Grid item xs={12}>
-          <Button className="line" variant="contained" type='submit'>Submit</Button>
+          <Button className="line" variant="contained" type='submit' endIcon={<HttpsIcon />}>Encrypt & Create</Button>
         </Grid>
-
-
-
       </Grid>
-
     </form>
   )
 }

@@ -1,5 +1,4 @@
-import { Grid } from '@mui/material'
-import Header from './Header'
+import { Grid, Typography } from '@mui/material'
 import MessageForm from './MessageForm'
 import { useNavigate } from 'react-router-dom';
 import EncryptionService from '../services/EncryptionService';
@@ -12,9 +11,10 @@ function CreateMessage() {
   }
   return (
     <>
-
       <Grid item className='form-item'>
-        <Header />
+        <Typography variant="h4">
+          New Encrypted Message
+        </Typography>
       </Grid>
       <Grid item className='form-item'>
         <MessageForm onMessageCreated={howUrl} encryptionService={new EncryptionService} />
