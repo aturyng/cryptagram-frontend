@@ -6,43 +6,43 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import { Link, Outlet } from 'react-router-dom';
-import { Container, Grid } from '@mui/material'
+import MailLockIcon from '@mui/icons-material/MailLock';
+import { NavLink, Outlet } from 'react-router-dom';
+import { Container, Grid, styled } from '@mui/material';
 
-const pages = ['messages', 'About'];
 const links = [['Create Message', ''], ['About', 'about']]
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
+export const NavbarLink = styled(NavLink)`
+color: white;
+text-decoration: none;
+padding: 5px;
+&:hover,
+&:focus{
+   color: black;
+};
+`
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
 
   return (
     <>
-      <AppBar position="static">
+
+      <AppBar position="static" color="primary">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+            <MailLockIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
               variant="h6"
               noWrap
@@ -58,7 +58,7 @@ function ResponsiveAppBar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              CryptaGram
             </Typography>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -93,13 +93,13 @@ function ResponsiveAppBar() {
                 {links.map((page) => (
                   <MenuItem key={page[0]} onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">
-                      <Link to={page[1]}>{page[0]}</Link>
+                      <NavLink to={page[1]}>{page[0]}</NavLink>
                     </Typography>
                   </MenuItem>
                 ))}
               </Menu>
             </Box>
-            <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+            <MailLockIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
             <Typography
               variant="h5"
               noWrap
@@ -116,52 +116,42 @@ function ResponsiveAppBar() {
                 textDecoration: 'none',
               }}
             >
-              LOGO
+              CryptaGram
             </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} >
               {links.map((page) => (
                 <Button
                   key={page[0]}
                   onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: 'white', display: 'block' }}
+
+                  sx={{
+                    my: 2,
+                    mx: 1,
+                    borderRadius: '20px',
+                    '&:hover': {
+                      backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    fontSize: '1.1rem',
+                    color: 'white', // Set the color to white
+
+
+                  }}
+                  component={NavbarLink}
+                  to={page[1]}
                 >
-                  <Link to={page[1]}>{page[0]}</Link>
+                  <NavbarLink to={page[1]}
+
+                  >{page[0]}</NavbarLink>
                 </Button>
               ))}
             </Box>
 
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title="Open settings">
-                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                </IconButton>
-              </Tooltip>
-              <Menu
-                sx={{ mt: '45px' }}
-                id="menu-appbar"
-                anchorEl={anchorElUser}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={Boolean(anchorElUser)}
-                onClose={handleCloseUserMenu}
-              >
-                {settings.map((setting) => (
-                  <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center">{setting}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
-            </Box>
+
           </Toolbar>
         </Container>
       </AppBar>
+
+
       <Container className="main-container" maxWidth="xl">
         <Grid container >
           <Outlet />
