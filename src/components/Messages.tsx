@@ -28,7 +28,7 @@ function Messages() {
   const [decipheringText, setDecipheringText] = useState<string | undefined>('');
   const [passwordReceived, setPasswordReceived] = useState<boolean>(false);
   const [decryptionStatus, setDecryptionStatus] = useState<DecryptionStatus>(DecryptionStatus.Initial);
- 
+
 
   const search = useLocation().search;
   const password = new URLSearchParams(search).get('pw');
@@ -55,12 +55,12 @@ function Messages() {
 
   useEffect(() => {
     if (message?.destroyLiveAfterSeconds) {
-          const timer = setTimeout(() => {
-              setMessage(undefined);
-              setDecipheringText(undefined);
-          }, message?.destroyLiveAfterSeconds * 1000);
-          return () => clearTimeout(timer)
-      }
+      const timer = setTimeout(() => {
+        setMessage(undefined);
+        setDecipheringText(undefined);
+      }, message?.destroyLiveAfterSeconds * 1000);
+      return () => clearTimeout(timer)
+    }
   }, [message?.destroyLiveAfterSeconds]);
 
   useEffect(() => {
@@ -123,34 +123,34 @@ function Messages() {
 
   return (
     <>
-      <Grid item className="form-item">
+      <Grid item >
         {!password && !passwordReceived && <PasswordForm onPasswordEntered={onPasswordReceived} />}
         {loaded && !message && <MessageDeleted />}
         {loaded && message && (
-          <Grid item className="form-item">
-            <div className="envelope">
-              <div className="envelope-content">
-                <Typography variant="h6" gutterBottom className="decrypting-header">
-                  {decryptionStatus === DecryptionStatus.Done ? (
-                    <>
-                      <LockOpenIcon className="lock-icon" /> Decrypted Message
-                    </>
-                  ) : (
-                    <>
-                      <LockIcon className={`lock-icon ${decryptionStatus === DecryptionStatus.Decrypting ? 'bounce' : ''}`} /> Decrypting...
-                    </>
-                  )}
-                </Typography>
-                <Textarea
-                  sx={{ mb: 1, mt: 1 }}
-                  placeholder="Enter your self-destructing message here..."
-                  readOnly
-                  size="lg"
-                  variant="outlined"
-                  value={decipheringText}
-                />
-              </div>
+          <Grid item className="envelope">
+
+            <div className="envelope-content">
+              <Typography variant="h6" gutterBottom className="decrypting-header">
+                {decryptionStatus === DecryptionStatus.Done ? (
+                  <>
+                    <LockOpenIcon className="lock-icon" /> Decrypted Message
+                  </>
+                ) : (
+                  <>
+                    <LockIcon className={`lock-icon ${decryptionStatus === DecryptionStatus.Decrypting ? 'bounce' : ''}`} /> Decrypting...
+                  </>
+                )}
+              </Typography>
+              <Textarea
+                sx={{ mb: 1, mt: 1 }}
+                placeholder="Enter your self-destructing message here..."
+                readOnly
+                size="lg"
+                variant="outlined"
+                value={decipheringText}
+              />
             </div>
+
           </Grid>
         )}
       </Grid>

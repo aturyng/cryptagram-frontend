@@ -2,7 +2,7 @@
 .main-container {
   width: 80%;
   height: 92vh;
-  background-color: lightgray;
+  background-color: rgb(240, 240, 240);
   border-radius: 0.5em;
   padding: 1em;
   display: flex;
@@ -14,4 +14,8 @@
   padding-left: 10%;
   padding-right: 10%;
   padding-bottom: 0.5em;
+}
+
+body {
+  margin: 0
 }

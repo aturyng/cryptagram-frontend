@@ -10,7 +10,7 @@ import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import MailLockIcon from '@mui/icons-material/MailLock';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Container, Grid, styled } from '@mui/material';
+import { Container, Grid, Paper, styled } from '@mui/material';
 
 const links = [['Create Message', ''], ['About', 'about']]
 
@@ -35,12 +35,10 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
-
   return (
     <>
-
       <AppBar position="static" color="primary">
-        <Container maxWidth="xl">
+        <Container >
           <Toolbar disableGutters>
             <MailLockIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
@@ -133,8 +131,6 @@ function ResponsiveAppBar() {
                     },
                     fontSize: '1.1rem',
                     color: 'white', // Set the color to white
-
-
                   }}
                   component={NavbarLink}
                   to={page[1]}
@@ -151,12 +147,25 @@ function ResponsiveAppBar() {
         </Container>
       </AppBar>
 
+      <Grid container component="main" sx={{
+        height: '91.3vh',
+        backgroundImage: 'url(https://source.unsplash.com/random?wallpapers)',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: (t) =>
+          t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        width: '100%'
+      }}>
+        <Grid item justifyContent="flex-start" sm={12} md={8} lg={7} xl={6}>
+          <Container component="main" sx={{ mb: 4 }} >
+            <Paper variant="outlined" elevation={15} sx={{ my: { xs: 3, md: 6 }, p: { xs: 2, md: 3 } }}>
+              <Outlet />
+            </Paper>
+          </Container>
 
-      <Container className="main-container" maxWidth="xl">
-        <Grid container >
-          <Outlet />
         </Grid>
-      </Container>
+      </Grid>
     </>
   );
 }
