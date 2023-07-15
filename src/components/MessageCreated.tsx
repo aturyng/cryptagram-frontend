@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import Utils from "../util/Utils";
-import { Alert, Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import CopyableField from "./CopyableField";
 
 
@@ -14,11 +14,10 @@ function MessageCreated() {
   return (
     <>
       <Grid item >
+        <Typography variant="h5"  sx={{ mb: 3 }}>
+          Message successfully created! Copy the link below...
+        </Typography>
 
-        <Alert severity="success" sx={{ mb: 3 }}>
-
-          Message successfully created! <strong>Copy the link below...</strong>
-        </Alert>
         <Box>
           <CopyableField color="success" focused fullWidth label="URL" id="url" size="medium" multiline defaultValue={url} />
         </Box>
