@@ -81,9 +81,9 @@ export default function MessageForm(props: Props) {
       <div>
         <Textarea  sx={{ mb: 1, mt: 1 }}
           minRows={5}
-          placeholder="Enter your self-destructing message here..."
+          placeholder="Enter message here..."
           size="lg"
-          variant="soft"
+          variant="outlined"
           {...register("body", { required: true })}
           error={errors.body ? true : false}
         />
@@ -135,7 +135,7 @@ export default function MessageForm(props: Props) {
         <Grid item xs={12} sm={6} md={4} lg={3}>
           <TextField
             type='password'
-            label="Set password (optionally)"
+            label="Password (optionally)"
             variant='standard'
             fullWidth
             {...register("password")}
