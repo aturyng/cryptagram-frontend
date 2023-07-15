@@ -2,6 +2,9 @@ import './MessageForm.css'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { Button, FilledInput, FormControl, Grid, IconButton, InputAdornment, InputLabel } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
 
 
 type FormData = {
@@ -13,6 +16,15 @@ interface Props {
 }
 
 function PasswordForm(props: Props) {
+
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+    };
+
 
     const validationSchema = Yup.object().shape({
         password: Yup.string()
@@ -32,13 +44,34 @@ function PasswordForm(props: Props) {
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <label htmlFor="pwd">Password:</label>
-                <input type="password" id="pwd"
-                    {...register("password")}
-                    //error={errors.password ? true : false}
-                    //helperText={errors.password?.message}
-                />
-                <input type="submit" value="Submit" />
+                <Grid item xs={12}>
+                    <FormControl variant="filled">
+                        <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
+                        <FilledInput
+                            id="filled-adornment-password"
+                            type={showPassword ? 'text' : 'password'}
+                            {...register("password")}
+                            error={errors.password ? true : false}
+                            //>helperText={errors.password?.message}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="toggle password visibility"
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                    >
+                                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                                    </IconButton>
+                                </InputAdornment>
+                            }
+                        />
+                    </FormControl>
+
+                </Grid>
+                <Grid item xs={12}>
+                    <Button className="line" variant="contained" type='submit'>Submit</Button>
+                </Grid>
             </form>
         </div>
     )
