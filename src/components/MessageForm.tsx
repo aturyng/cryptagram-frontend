@@ -78,86 +78,93 @@ export default function MessageForm(props: Props) {
   return (
 
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <Textarea  sx={{ mb: 1, mt: 1 }}
-          minRows={5}
-          placeholder="Enter message here..."
-          size="lg"
-          variant="outlined"
-          {...register("body", { required: true })}
-          error={errors.body ? true : false}
-        />
-        <Typography variant="inherit" color="red">
-          {errors.body?.message}
-        </Typography>
-      </div>
 
-      <Grid container spacing={2} >
-        <Grid item xs={12} sm={6} md={4} lg={3} >
+      <Grid container spacing={3}  >
+        <Grid item xs={12}>
+          <Textarea
+            minRows={5}
+            placeholder="Enter message here..."
+            size="lg"
+            variant="outlined"
+            {...register("body", { required: true })}
+            error={errors.body ? true : false}
+          />
+          <Typography variant="inherit" color="red">
+            {errors.body?.message}
+          </Typography>
+        </Grid>
 
-          <List disablePadding>
-            <ListItem alignItems="flex-start" disablePadding>
-              <FormControlLabel
-                label="Autoclose after "
-                labelPlacement="end"
-                control={<Checkbox
-                  {...register("destroyLive")}
-                />}
-              />
-              <TextField
-                type='number'
-                disabled={!watch('destroyLive')}
-                label="seconds"
-                variant='standard'
-                fullWidth
-                {...register("destroyLiveAfterSeconds")}
-                error={errors.destroyLiveAfterSeconds ? true : false}
-                helperText={errors.destroyLiveAfterSeconds?.message}
-              />
-            </ListItem>
-          </List>
+        <Grid container item spacing={3} md={12} xl={6} >
+          <Grid item xs={12} sm={6} xl={8} >
 
+            <List disablePadding>
+              <ListItem alignItems="flex-start" disablePadding>
+                <FormControlLabel
+                  label="Close after"
+                  labelPlacement="end"
+                  control={<Checkbox
+                    {...register("destroyLive")}
+                  />}
+                />
+                <TextField
+                  type='number'
+                  disabled={!watch('destroyLive')}
+                  label="seconds"
+                  variant='standard'
+                  fullWidth
+                  {...register("destroyLiveAfterSeconds")}
+                  error={errors.destroyLiveAfterSeconds ? true : false}
+                  helperText={errors.destroyLiveAfterSeconds?.message}
+                />
+              </ListItem>
+            </List>
+
+          </Grid>
+          <Grid item xs={12} sm={6} xl={4}  >
+            <TextField
+              type='number'
+              label="Destroy after days"
+              variant='standard'
+              defaultValue={1}
+              fullWidth
+              {...register("destroyAfterDays")}
+              error={errors.destroyAfterDays ? true : false}
+              helperText={errors.destroyAfterDays?.message}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3} >
-          <TextField
-            type='number'
-            label="Destroy after days"
-            variant='standard'
-            defaultValue={1}
-            fullWidth
-            {...register("destroyAfterDays")}
-            error={errors.destroyAfterDays ? true : false}
-            helperText={errors.destroyAfterDays?.message}
-          />
-        </Grid>
-      </Grid>
-      <Grid container spacing={2} >
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <TextField
-            type='password'
-            label="Password (optionally)"
-            variant='standard'
-            fullWidth
-            {...register("password")}
-            error={errors.password ? true : false}
-            helperText={errors.password?.message}
-          />
-        </Grid>
-        <Grid item xs={12} sm={6} md={4} lg={3}>
-          <TextField
-            type='password'
-            label="Confirm password"
-            variant='standard'
-            fullWidth
-            {...register("confirmPassword")}
-            error={errors.confirmPassword ? true : false}
-            helperText={errors.confirmPassword?.message}
-          />
+        <Grid container item spacing={3} md={12} xl={6} >
+          <Grid item xs={12} sm={6} >
+            <TextField
+              type='password'
+              label="Password (optionally)"
+              variant='standard'
+              fullWidth
+              {...register("password")}
+              error={errors.password ? true : false}
+              helperText={errors.password?.message}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} >
+            <TextField
+              type='password'
+              label="Confirm password"
+              variant='standard'
+              fullWidth
+              {...register("confirmPassword")}
+              error={errors.confirmPassword ? true : false}
+              helperText={errors.confirmPassword?.message}
+            />
+          </Grid>
+
         </Grid>
         <Grid item xs={12}>
           <Button className="line" variant="contained" type='submit' endIcon={<HttpsIcon />}>Encrypt & Create</Button>
         </Grid>
       </Grid>
+
+
+
     </form>
   )
 }
