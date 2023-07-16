@@ -1,8 +1,7 @@
-import { Button, FormControlLabel, Grid, List, ListItem, Switch, TextField } from '@mui/material'
+import { Button, FormControlLabel, Grid, List, ListItem, Switch, TextField, Typography } from '@mui/material'
 import { Textarea } from '@mui/joy'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import * as Yup from 'yup';
-import Typography from './onepirate-template/modules/components/Typography'
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import EncryptionService from '../services/EncryptionService';
