@@ -8,6 +8,10 @@ export default ({ mode }) => {
   return defineConfig({
     plugins: [react()],
     assetsInclude: ['**/*.md'],
+    server: {
+      host: true,
+      port: 5173,
+    }
   });
 }
 
