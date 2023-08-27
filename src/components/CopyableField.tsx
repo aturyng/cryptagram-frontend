@@ -14,10 +14,19 @@ interface CopyableFieldProps extends Omit<TextFieldProps, 'onCopy'> {
 const CopyableField: React.FC<CopyableFieldProps> = ({ onCopy, ...props }) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null);
     const [showSnackbar, setShowSnackbar] = React.useState(false);
+
+    async function copyTextToClipboard(text: string) {
+        if ('clipboard' in navigator) {
+          return await navigator.clipboard.writeText(text);
+        } else {
+          return document.execCommand('copy', true, text);
+        }
+      }
+
     const handleCopy = () => {
         if (inputRef.current) {
             inputRef.current.select();
-            navigator.clipboard.writeText(inputRef.current.value)
+            copyTextToClipboard(inputRef.current.value)
                 .then(() => {
                     if (onCopy) {
                         onCopy();
