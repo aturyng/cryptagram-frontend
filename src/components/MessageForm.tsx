@@ -6,6 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import EncryptionService from '../services/EncryptionService';
 import HttpsIcon from '@mui/icons-material/Https';
+import { useTranslation } from 'react-i18next';
 
 
 type FormData = {
@@ -25,7 +26,7 @@ interface Props {
 }
 
 export default function MessageForm(props: Props) {
-
+  const { t } = useTranslation();
   const validationSchema = Yup.object().shape({
     body: Yup.string()
       .required('Message is required')
@@ -59,7 +60,7 @@ export default function MessageForm(props: Props) {
     resolver: yupResolver(validationSchema)
   });
   const onSubmit: SubmitHandler<FormData> = (formData) => {
-    let { ["confirmPassword"]: _, ["destroyLive"]: __, ...formDataRequiredFields } = formData;
+    const { ["confirmPassword"]: _, ["destroyLive"]: __, ...formDataRequiredFields } = formData;
     let randomStr = "";
     if (!formDataRequiredFields.password) {
       randomStr = props.encryptionService.generateRandomPassword();
@@ -82,7 +83,7 @@ export default function MessageForm(props: Props) {
         <Grid item xs={12}>
           <Textarea
             minRows={5}
-            placeholder="Enter message here..."
+            placeholder={t('create-message.form.main-body.placeholder')}
             size="lg"
             variant="outlined"
             {...register("body", { required: true })}
@@ -98,13 +99,13 @@ export default function MessageForm(props: Props) {
 
             <List disablePadding>
               <ListItem alignItems="flex-start" disablePadding>
-                <FormControlLabel label="Close after" labelPlacement="end" control={
+                <FormControlLabel label={t('create-message.form.close-after.label')} labelPlacement="end" control={
                   <Switch {...register("destroyLive")} />}
                 />
                 <TextField
                   type='number'
                   disabled={!watch('destroyLive')}
-                  label="seconds"
+                  label={t('create-message.form.seconds.label')}
                   variant='standard'
                   fullWidth
                   {...register("destroyLiveAfterSeconds")}
@@ -118,7 +119,7 @@ export default function MessageForm(props: Props) {
           <Grid item xs={12} sm={6} xl={4}  >
             <TextField
               type='number'
-              label="Destroy after days"
+              label={t('create-message.form.destroy-after.label')}
               variant='standard'
               defaultValue={1}
               fullWidth
@@ -132,7 +133,7 @@ export default function MessageForm(props: Props) {
           <Grid item xs={12} sm={6} >
             <TextField
               type='password'
-              label="Password (optionally)"
+              label={t('create-message.form.password.label')}
               variant='standard'
               fullWidth
               {...register("password")}
@@ -143,7 +144,7 @@ export default function MessageForm(props: Props) {
           <Grid item xs={12} sm={6} >
             <TextField
               type='password'
-              label="Confirm password"
+              label={t('create-message.form.confirm-password.label')}
               variant='standard'
               fullWidth
               {...register("confirmPassword")}
@@ -154,7 +155,7 @@ export default function MessageForm(props: Props) {
 
         </Grid>
         <Grid item xs={12}>
-          <Button className="line" variant="contained" type='submit' endIcon={<HttpsIcon />}>Encrypt & Create</Button>
+          <Button className="line" variant="contained" type='submit' endIcon={<HttpsIcon />}>{t('create-message.form.btn_confirm.label')}</Button>
         </Grid>
       </Grid>
 

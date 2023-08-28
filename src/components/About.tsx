@@ -1,15 +1,15 @@
 import { Grid, Typography } from '@mui/material'
+import { useTranslation } from 'react-i18next';
 
 function About() {
+  const { t } = useTranslation();
   return (
     <>
       <Grid item className='form-item'>
-        <Typography variant="h4">About</Typography>
+        <Typography variant="h4">{t('about.header')}</Typography>
       </Grid>
       <Grid item className='form-item'>
-        <Typography variant="h6">This free-of-charge service allows you to securely send an encrypted message, 
-        which self-destructs after it's been read. Also we offer a unique feature to set a time period to view the message. 
-        When the time runs out, the message is removed in real time from the screen. </Typography>
+        <Typography variant="h6">{t('about.body')}</Typography>
       </Grid>
     </>
   )

@@ -11,8 +11,9 @@ import MenuItem from '@mui/material/MenuItem';
 import MailLockIcon from '@mui/icons-material/MailLock';
 import { NavLink, Outlet } from 'react-router-dom';
 import { Container, Grid, Paper, styled } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
-const links = [['Create Message', ''], ['About', 'about']]
+
 
 export const NavbarLink = styled(NavLink)`
 color: white;
@@ -35,6 +36,10 @@ function ResponsiveAppBar() {
     setAnchorElNav(null);
   };
 
+  const { t } = useTranslation();
+
+  const links = [[t('app-nav-bar.create-message.label'), ''], [t('app-nav-bar.about.label'), 'about']]
+  
   return (
     <>
       <AppBar position="static" color="primary">
