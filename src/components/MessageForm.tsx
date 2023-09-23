@@ -34,6 +34,9 @@ export default function MessageForm(props: Props) {
       .max(5000, t('create-message.form.validation.message-not-longer-than')),
     destroyLive: Yup.bool(),
     destroyLiveAfterSeconds: Yup.number()
+      .notRequired()
+      .transform((value) => Number.isNaN(value) ? 0 : value )
+      .nullable()
       .min(0, t('create-message.form.validation.cannot-negative'))
       .max(60, t('create-message.form.validation.cannot-exceed-sec')),
     password: Yup.string(),
@@ -117,7 +120,7 @@ export default function MessageForm(props: Props) {
                     type='number'
                     label={t('create-message.form.close-after.label')}
                     variant='standard'
-                    defaultValue={null}
+                    
                     fullWidth
                     {...register("destroyLiveAfterSeconds")}
                         error={errors.destroyLiveAfterSeconds ? true : false}
